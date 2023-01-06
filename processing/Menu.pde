@@ -374,7 +374,7 @@ class Menu{
     popMatrix();
     
     println(levels);
-    //Level();
+    Levels();
     
     pushMatrix();
     textFont(menuFont);
@@ -597,12 +597,14 @@ class Menu{
   //  }
   //}
   
-  void Level(){
+  void Levels(){
+    panels = 2;
     switch (levels) {
       // ------------ Level 1 --------------
       case 1:
-        time = 3;
-        duration = 3;
+        time = 23;
+        duration = 23;
+        println();
         if (time > 0){
           TextLevel();
           TimeRemaining();
@@ -610,8 +612,8 @@ class Menu{
           if(time <= -0){
             time = 0;
             duration = 0;
-            //levels++;
-            panels = 1;
+            levels++;
+            panels = 2;
           }
         }
       break;
@@ -622,9 +624,9 @@ class Menu{
         s.showShuriken2();
         popMatrix();
         
-        time = 23;
-        duration = 23;
-        println(time);
+        time = 43;
+        duration = 43;
+        println();
         if (time > 0){
           TextLevel();
           TimeRemaining();
@@ -633,7 +635,7 @@ class Menu{
             time = 0;
             duration = 0;
             levels++;
-            panels = 1;
+            panels = 2;
           }
         }
       break;

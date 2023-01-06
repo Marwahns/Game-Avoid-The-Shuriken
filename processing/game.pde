@@ -14,10 +14,13 @@ Menu m = new Menu();
 Ninja n = new Ninja();
 Shuriken s = new Shuriken();
 
-float begin; 
-float duration = 5;
+float begin, duration, countDown;
 float time = 5;
 int levels = 1;
+
+String times;
+int t;
+int interval;
 
 int panels = 0;
 int angle = 0;
@@ -96,7 +99,7 @@ void draw() {
       m.TryAgain();
       break;
     case 7:
-      m.Level();
+      m.Levels();
       break;
     case 8:
       m.BackToHome();
