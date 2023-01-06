@@ -1,5 +1,13 @@
-PImage gameBackground, menuBackground, charShuriken, boxingRing, characterNinja;
+import processing.sound.*;
+
+SoundFile soundButton, soundClick, backsound,soundMenu, soundGamePlay;
+
+PImage BgHome, gameBackground, BgMenu, charShuriken, boxingRing, characterNinja;
 PFont menuFont, creditsFont;
+
+PFont namagame;
+
+PVector savedShuriken; //The saved mouse position
 
 // Object Class
 Menu m = new Menu();
@@ -11,7 +19,7 @@ float duration = 5;
 float time = 5;
 int levels = 1;
 
-int panels = 1;
+int panels = 0;
 int angle = 0;
 int hit = 0;
 int score = 0;
@@ -21,15 +29,24 @@ void setup() {
   size(1000, 970);
   begin = millis();   
   
+  savedShuriken = new PVector(0, 0); //Initialize the PVector
+  
+  // Load Sound
+  soundButton = new SoundFile(this, "../asset/sound/button.mp3"); 
+  soundMenu = new SoundFile(this, "../asset/sound/menu.mp3");
+  soundGamePlay = new SoundFile(this, "../asset/sound/gameplay.mp3");
+  
   // Load images
-  menuBackground = loadImage("../asset/images/background_menu.jpeg");
   boxingRing = loadImage("../asset/images/boxingRing.jpg");
   charShuriken = loadImage("../asset/images/shuriken.png");
   characterNinja = loadImage("../asset/images/ninja.png");
+  BgHome = loadImage("../asset/images/BgHome.jpg");
+  BgMenu = loadImage("../asset/images/backgrounmenufix.png");
   
   //Load font style
   menuFont = loadFont("../asset/font/EngraversMT-25.vlw");
   creditsFont = loadFont("../asset/font/EngraversMT-22.vlw");
+  namagame = loadFont("../asset/font/Algerian-48.vlw");
   
 }
 
@@ -52,27 +69,36 @@ void draw() {
   //n.showNinja();
   //s.showShuriken();
   //n.mouseDragged();
+  image(BgHome, 0, 0); 
   switch(panels){
     case 0:
       m.Home();
       break;
     case 1:
-      m.Play();
+      m.menu();
       break;
     case 2:
-      m.Credits();
+      m.Play();
       break;
     case 3:
-      m.Quit();
+      m.Options();
       break;
     case 4:
-      m.Level();
+      m.Credits();
+      //m.Level();
       break;
     case 5:
-      m.BackToHome();
+      m.Quit();
+      //m.BackToHome();
       break;
     case 6:
       m.TryAgain();
+      break;
+    case 7:
+      m.Level();
+      break;
+    case 8:
+      m.BackToHome();
       break;
     default:
       println("Page not found");
