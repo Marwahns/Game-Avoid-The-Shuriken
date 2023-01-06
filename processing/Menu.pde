@@ -189,7 +189,9 @@ class Menu{
       fill(0);
       text("PLAY", 560, 300);
       if (mousePressed) {
+        soundMenu.stop();
         soundButton.play();
+        soundGamePlay.play();
         panels = 2;
       }
     }

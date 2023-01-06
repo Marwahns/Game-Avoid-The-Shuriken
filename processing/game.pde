@@ -1,6 +1,6 @@
 import processing.sound.*;
 
-SoundFile soundButton, soundClick, backsound,soundMenu, soundGamePlay;
+SoundFile soundButton, soundClick, backsound, soundMenu, soundGamePlay;
 
 PImage BgHome, gameBackground, BgMenu, charShuriken, boxingRing, characterNinja;
 PFont menuFont, creditsFont;
@@ -35,6 +35,7 @@ void setup() {
   soundButton = new SoundFile(this, "../asset/sound/button.mp3"); 
   soundMenu = new SoundFile(this, "../asset/sound/menu.mp3");
   soundGamePlay = new SoundFile(this, "../asset/sound/gameplay.mp3");
+  soundMenu.play();
   
   // Load images
   boxingRing = loadImage("../asset/images/boxingRing.jpg");
