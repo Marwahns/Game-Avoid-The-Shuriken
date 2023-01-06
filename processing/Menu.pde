@@ -370,10 +370,11 @@ class Menu{
     image(boxingRing,0,0);
     n.showNinja();
     s.showShuriken();
+    s.watchRacketBounce();
     n.mouseDragged();
     popMatrix();
     
-    println(levels);
+    //println(levels);
     Levels();
     
     pushMatrix();
@@ -437,6 +438,8 @@ class Menu{
   
   void TryAgain(){
     pushMatrix();
+    time = 0;
+    duration = 0;
     background(0);
     fill(255);
     textFont(menuFont);
@@ -604,7 +607,7 @@ class Menu{
       case 1:
         time = 23;
         duration = 23;
-        println();
+        //println();
         if (time > 0){
           TextLevel();
           TimeRemaining();
@@ -612,7 +615,7 @@ class Menu{
           if(time <= -0){
             time = 0;
             duration = 0;
-            levels++;
+            //levels++;
             panels = 2;
           }
         }
@@ -626,7 +629,7 @@ class Menu{
         
         time = 43;
         duration = 43;
-        println();
+        //println();
         if (time > 0){
           TextLevel();
           TimeRemaining();

@@ -1,11 +1,12 @@
 
 boolean gameOver = false;
-
+float test;
 class Shuriken{
   // Variabel
   float shurikenX1, shurikenY1, shurikenX2, shurikenY2, shurikenX3, shurikenY3, shurikenW, shurikenH;
   float speedShurikenX1, speedShurikenY1, speedShurikenX2, speedShurikenY2, speedShurikenX3, speedShurikenY3;
   int xDirectionShuriken1, yDirectionShuriken1 , xDirectionShuriken2, yDirectionShuriken2, xDirectionShuriken3, yDirectionShuriken3; 
+  int X1, Y1;
   
   // Constructor
   Shuriken(){
@@ -37,6 +38,8 @@ class Shuriken{
     yDirectionShuriken2 = 3;
     xDirectionShuriken3 = 2;  
     yDirectionShuriken3 = 1;
+    
+    
   }
   
   // Method
@@ -59,6 +62,10 @@ class Shuriken{
         // Jarak antara mouseX si ninja dengan koordinat shuriken, game over
         // posisi ninjaX - posisi shurikenX
         // posisi shuriken diambil berdasarkan current posisi bukan diambil dari posisi ketika shuriken pantul
+        X1 = (int)shurikenX1;
+        Y1 = (int)shurikenY1;
+        c = get(X1, Y1);
+        //println(c);
         float distanceX1 = abs(n.ninjaX - shurikenX1);
         //println(savedShuriken.x, "," ,shurikenX1);
         if(distanceX1 > 0 && distanceX1 < 10){
@@ -93,11 +100,79 @@ class Shuriken{
         //panels = 3;
         //m.TryAgain();
        //m.HomeInGame();
+       //m.Quit();
       }
       
-    } 
+    } else{
+       gameOver = true;
+       time = 0;
+       duration = 0;
+       pushMatrix();
+       background(0);
+       //image(gameBackground,0,0);
+       textFont(namagame);
+       //background(0);
+       fill(250,250,250);
+       text("PERMAINAN SELESAI", 270,200);
+       text("Total Skor Anda = " + score, 240,300);
+       text("BACK", 450,500);
+       //text("BACK", 530,400);
+      //watchRacketBounce();
+       popMatrix();
+       if(dist(mouseX, mouseY, 450,490) < 30) {
+         pushMatrix();
+         fill(102, 178, 255);
+         text("BACK",450,500);
+         popMatrix();
+         if (mousePressed){
+            //soundButton.play();
+            //soundGamePlay.stop();
+            //soundMenu.play();
+            //panels = 0;
+            pushMatrix();
+            text("hmm", 450, 590);
+            //panels = 0;
+            m.menu();
+            popMatrix();
+          }
+        }
+        
+     }
     
   }
+  
+  void makeBounceBottom(int surface) {
+    test = s.shurikenY1;
+    s.shurikenY1= surface-(s.shurikenW/2);
+    //if(test == s.shurikenY1){
+    //  //s.shurikenY1= surface-(s.shurikenW/2);
+    //  //exit();
+    //  panels = 6;
+    //}
+    hit+=1;
+    gameOver();
+    //s.shurikenY1= surface-(s.shurikenW/2);
+    ////hit += 1;
+    //background(0);
+    println(mouseY, surface);
+  }
+  
+  void watchRacketBounce() {
+    float overhead = mouseY - pmouseY;
+    if ((s.shurikenX1+(s.shurikenW/2) > mouseX-(n.ninjaW/2)) && (s.shurikenX1-(s.shurikenW/2) < mouseX+(n.ninjaW/2))) {
+      if (dist(s.shurikenX1, s.shurikenY1, s.shurikenX1, mouseY)<=(s.shurikenW/2)+abs(overhead)) {
+        makeBounceBottom(mouseY);
+        //// racket moving up
+        //if (overhead<0) {
+        //  //hit += 1;
+        //  panels = 6;
+        //}
+        panels = 6;
+      }
+    }
+  }
+  
+  
   
   void showShuriken2(){
     pushMatrix();
@@ -114,7 +189,7 @@ class Shuriken{
         speedShurikenX2 *= -1;
         //float distance = abs(mouseX - shurikenX2);
         float distance = abs(n.ninjaX - shurikenX2);
-        println(distance, n.ninjaX);
+        //println(distance, n.ninjaX);
         if(distance > 0 && distance < 10 || distance==n.ninjaX){
           hit += 1;
         }
@@ -198,8 +273,41 @@ class Shuriken{
        //m.HomeInGame();
       }
       
-    } 
+    } else{
+       gameOver = true;
+       image(gameBackground,0,0);
+       textFont(menuFont);
+       fill(250,250,250);
+       text("PERMAINAN SELESAI", 430,200);
+       text("Total Skor Anda = " + score, 400,300);
+       text("BACK", 530,400);
+       //exit();
+       
+       if(dist(mouseX, mouseY, 540,400) < 30) {
+          fill(102, 178, 255);
+          text("BACK",530,400);
+          if (mousePressed){
+            soundButton.play();
+            soundGamePlay.stop();
+            soundMenu.play();
+            panels = 0;
+          }
+        }
+        
+     }
     
+  }
+  
+  void gameOver(){
+    if(hit ==1){
+        gameOver = true;
+        //panels = 3;
+        //m.TryAgain();
+       //m.HomeInGame();
+       //m.Quit();
+       //exit();
+       background(0);
+      }
   }
   
 }

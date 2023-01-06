@@ -1,5 +1,6 @@
 class Ninja {
   float ninjaX, ninjaY, ninjaW, ninjaH;
+  float ballSpeedVert;
   
   // Constructor
   Ninja() {
@@ -7,6 +8,7 @@ class Ninja {
     ninjaY = 450;
     ninjaW = 100;
     ninjaH = 100;
+    ballSpeedVert = 0;
   }
   
   // Method
@@ -27,6 +29,36 @@ class Ninja {
     }
  
   }
-
+  
+  void makeBounceBottom(int surface) {
+    test = s.shurikenY1;
+    s.shurikenY1= surface-(s.shurikenW/2);
+    //if(test == s.shurikenY1){
+    //  //s.shurikenY1= surface-(s.shurikenW/2);
+    //  //exit();
+    //  panels = 6;
+    //}
+    hit+=1;
+    //s.shurikenY1= surface-(s.shurikenW/2);
+    ////hit += 1;
+    //background(0);
+    println(mouseY, surface);
+  }
+  
+  void watchRacketBounce() {
+    float overhead = mouseY - pmouseY;
+    if ((s.shurikenX1+(s.shurikenW/2) > mouseX-(ninjaW/2)) && (s.shurikenX1-(s.shurikenW/2) < mouseX+(ninjaW/2))) {
+      if (dist(s.shurikenX1, s.shurikenY1, s.shurikenX1, mouseY)<=(s.shurikenW/2)+abs(overhead)) {
+        makeBounceBottom(mouseY);
+        //// racket moving up
+        //if (overhead<0) {
+        //  //hit += 1;
+        //  panels = 6;
+        //}
+        panels = 6;
+      }
+    }
+  }
+  
   
 }

@@ -18,6 +18,8 @@ float begin, duration, countDown;
 float time = 5;
 int levels = 1;
 
+float c;
+
 String times;
 int t;
 int interval;
