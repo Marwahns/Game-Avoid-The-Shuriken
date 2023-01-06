@@ -377,10 +377,10 @@ class Menu{
     //println(levels);
     Levels();
     
-    pushMatrix();
-    textFont(menuFont);
-    text("Home ",30, 950);
-    popMatrix();
+    //pushMatrix();
+    //textFont(menuFont);
+    //text("Home ",30, 950);
+    //popMatrix();
   }
   
   void Options(){
@@ -609,8 +609,6 @@ class Menu{
         duration = 23;
         //println();
         if (time > 0){
-          TextLevel();
-          TimeRemaining();
           
           if(time <= -0){
             time = 0;

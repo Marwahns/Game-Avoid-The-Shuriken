@@ -56,7 +56,15 @@ class Shuriken{
       
       savedShuriken.x = shurikenX1;  //Save the mouse position;
       savedShuriken.y = shurikenY1;
-  
+      
+      m.TextLevel();
+          m.TimeRemaining();
+          
+          pushMatrix();
+    textFont(menuFont);
+    text("Home ",30, 950);
+    popMatrix();
+          
       if ((shurikenX1 > 845) || (shurikenX1 < 200)) {
         speedShurikenX1 *= -1;
         // Jarak antara mouseX si ninja dengan koordinat shuriken, game over
@@ -89,11 +97,13 @@ class Shuriken{
       score += 1;
       //m.BackToHome();
       
-      pushMatrix();
-      fill(0);
-      textFont(menuFont);
-      text("Skor Anda : " + score, 20, 40);
-      popMatrix();
+      //pushMatrix();
+      //fill(0);
+      //textFont(menuFont);
+      //text("Skor Anda : " + score, 20, 40);
+      //popMatrix();
+      
+      Skor();
       
       if(hit ==1){
         gameOver = true;
@@ -139,6 +149,14 @@ class Shuriken{
         
      }
     
+  }
+  
+  void Skor(){
+    pushMatrix();
+      fill(0);
+      textFont(menuFont);
+      text("Skor Anda : " + score, 20, 40);
+      popMatrix();
   }
   
   void makeBounceBottom(int surface) {
