@@ -1,40 +1,29 @@
 import processing.sound.*;
 
 SoundFile soundButton, soundClick, backsound, soundMenu, soundGamePlay;
-
 PImage BgHome, gameBackground, BgMenu, charShuriken, boxingRing, characterNinja;
-PFont menuFont, creditsFont;
-
-PFont namagame;
-
-PVector savedShuriken; //The saved mouse position
+PFont namagame, menuFont, creditsFont;
 
 // Object Class
 Menu m = new Menu();
 Ninja n = new Ninja();
 Shuriken s = new Shuriken();
 
-float begin, duration, countDown;
-float time = 5;
+boolean gameOver = false;
+
+float begin, countDown;
+float time = 25;
+float duration = 25;
 int levels = 1;
 
-float c;
-
-String times;
-int t;
-int interval;
-
 int panels = 0;
-int angle = 0;
 int hit = 0;
 int score = 0;
 
 void setup() {
   smooth();
   size(1000, 970);
-  begin = millis();   
-  
-  savedShuriken = new PVector(0, 0); //Initialize the PVector
+  begin = millis(); 
   
   // Load Sound
   soundButton = new SoundFile(this, "../asset/sound/button.mp3"); 
@@ -57,24 +46,6 @@ void setup() {
 }
 
 void draw() {
-  //pushMatrix();
-  //image(boxingRing,0,0);
-  //popMatrix();
-  
-  //if (time > 0){  
-  //  pushMatrix();
-  //  textFont(menuFont);
-  //  time = duration - (millis() - begin)/1000;
-  //  text(time, 860, 40);
-  //  popMatrix();
-  //}
-  //pushMatrix();
-  //image(menuBackground,0,0);
-  //popMatrix();
-  
-  //n.showNinja();
-  //s.showShuriken();
-  //n.mouseDragged();
   image(BgHome, 0, 0); 
   switch(panels){
     case 0:
@@ -91,11 +62,9 @@ void draw() {
       break;
     case 4:
       m.Credits();
-      //m.Level();
       break;
     case 5:
       m.Quit();
-      //m.BackToHome();
       break;
     case 6:
       m.TryAgain();
