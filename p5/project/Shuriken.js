@@ -36,25 +36,33 @@ class Shuriken {
     this.yDirectionShuriken3 = 1;
   }
 
+  Skor() {
+    push();
+    fill(0);
+    textFont(menuFont);
+    text("Skor Anda : " + score, 20, 40);
+    pop();
+  }
+
   // Method
   showShuriken() {
-    pushMatrix();
+    push();
     image(charShuriken, this.shurikenX1 - 45, this.shurikenY1, this.shurikenW, this.shurikenH);
-    popMatrix();
+    pop();
 
     if (!gameOver) {
-      pushMatrix();
+      push();
       this.shurikenX1 = this.shurikenX1 + (this.speedShurikenX1 * this.xDirectionShuriken1);
       this.shurikenY1 = this.shurikenY1 + (this.speedShurikenY1 * this.yDirectionShuriken1);
-      popMatrix();
+      pop();
 
       m.TextLevel();
       m.TimeRemaining();
 
-      pushMatrix();
+      push();
       textFont(menuFont);
       text("Home ", 30, 950);
-      popMatrix();
+      pop();
 
       if ((this.shurikenX1 > 845) || (this.shurikenX1 < 200)) {
         this.speedShurikenX1 *= -1;
@@ -66,7 +74,7 @@ class Shuriken {
 
       n.showNinja();
       score += 1;
-      Skor();
+      this.Skor();
 
       if (hit == 1) {
         gameOver = true;
@@ -78,24 +86,16 @@ class Shuriken {
 
   }
 
-  Skor() {
-    pushMatrix();
-    fill(0);
-    textFont(menuFont);
-    text("Skor Anda : " + score, 20, 40);
-    popMatrix();
-  }
-
   showShuriken2() {
-    pushMatrix();
+    push();
     image(charShuriken, this.shurikenX2 - 45, this.shurikenY2, this.shurikenW, this.shurikenH);
-    popMatrix();
+    pop();
 
     if (!gameOver) {
-      pushMatrix();
+      push();
       this.shurikenX2 = this.shurikenX2 + (this.speedShurikenX2 * this.xDirectionShuriken2);
       this.shurikenY2 = this.shurikenY2 + (this.speedShurikenY2 * this.yDirectionShuriken2);
-      popMatrix();
+      pop();
 
       if ((this.shurikenX2 > 845) || (this.shurikenX2 < 200)) {
         this.speedShurikenX2 *= -1;
@@ -120,15 +120,15 @@ class Shuriken {
   }
 
   showShuriken3() {
-    pushMatrix();
+    push();
     image(charShuriken, this.shurikenX3 - 45, this.shurikenY3, this.shurikenW, this.shurikenH);
-    popMatrix();
+    pop();
 
     if (!gameOver) {
-      pushMatrix();
+      push();
       this.shurikenX3 = this.shurikenX3 + (this.speedShurikenX3 * this.xDirectionShuriken3);
       this.shurikenY3 = this.shurikenY3 + (this.speedShurikenY3 * this.yDirectionShuriken3);
-      popMatrix();
+      pop();
 
       if ((this.shurikenX3 > 845) || (this.shurikenX3 < 200)) {
         this.speedShurikenX3 *= -1;

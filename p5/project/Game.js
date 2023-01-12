@@ -14,28 +14,33 @@ var panels = 0;
 var hit = 0;
 var score = 0;
 
+function preload() {
+  // Load Sound
+  soundButton = loadSound("../../asset/sound/button.mp3");
+  soundMenu = loadSound("../../asset/sound/menu.mp3");
+  soundGamePlay = loadSound("../../asset/sound/gameplay.mp3");
+
+  // Load images
+  boxingRing = loadImage("../../asset/images/boxingRing.jpg");
+  charShuriken = loadImage("../../asset/images/shuriken.png");
+  characterNinja = loadImage("../../asset/images/ninja.png");
+  BgHome = loadImage("../../asset/images/BgHome.jpg");
+  BgMenu = loadImage("../../asset/images/backgrounmenufix.png");
+
+  //Load font style
+  menuFont = "../../asset/font/EngraversMT-25.vlw";
+  creditsFont = "../../asset/font/EngraversMT-22.vlw";
+  namagame = "../../asset/font/Algerian-48.vlw";
+  // menuFont = loadFont("../../asset/font/EngraversMT-25.vlw");
+  // creditsFont = loadFont("../../asset/font/EngraversMT-22.vlw");
+  // namagame = loadFont("../../asset/font/Algerian-48.vlw");
+}
+
 function setup() {
+  soundMenu.play();
   smooth();
   createCanvas(1000, 970);
   begin = millis();
-
-  // Load Sound
-  soundButton = new SoundFile(this, "../asset/sound/button.mp3");
-  soundMenu = new SoundFile(this, "../asset/sound/menu.mp3");
-  soundGamePlay = new SoundFile(this, "../asset/sound/gameplay.mp3");
-  soundMenu.play();
-
-  // Load images
-  boxingRing = loadImage("../asset/images/boxingRing.jpg");
-  charShuriken = loadImage("../asset/images/shuriken.png");
-  characterNinja = loadImage("../asset/images/ninja.png");
-  BgHome = loadImage("../asset/images/BgHome.jpg");
-  BgMenu = loadImage("../asset/images/backgrounmenufix.png");
-
-  //Load font style
-  menuFont = loadFont("../asset/font/EngraversMT-25.vlw");
-  creditsFont = loadFont("../asset/font/EngraversMT-22.vlw");
-  namagame = loadFont("../asset/font/Algerian-48.vlw");
 }
 
 function draw() {
@@ -69,6 +74,6 @@ function draw() {
       m.BackToHome();
       break;
     default:
-      println("Page not found");
+      print("Page not found");
   }
 }
