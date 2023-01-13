@@ -107,7 +107,7 @@ class Shuriken {
 
       n.showNinja();
       score += 1;
-      Skor();
+      this.Skor();
 
       if (hit == 1) {
         gameOver = true;
@@ -141,7 +141,7 @@ class Shuriken {
 
       n.showNinja();
       score += 1;
-      Skor();
+      this.Skor();
 
       if (hit == 1) {
         gameOver = true;

@@ -509,7 +509,7 @@ class Menu {
       pop();
       if (mouseIsPressed) {
         soundButton.play();
-        delay(200);
+        // delay(200);
         panels = 1;
       }
     }
@@ -549,7 +549,7 @@ class Menu {
       pop();
       if (mouseIsPressed) {
         soundButton.play();
-        exit();
+        // exit();
       }
     }
 
@@ -637,8 +637,8 @@ class Menu {
         duration = 40;
         //print();
         if (time > 0) {
-          TextLevel();
-          TimeRemaining();
+          this.TextLevel();
+          this.TimeRemaining();
 
           if (time <= -0) {
             time = 0;
@@ -659,8 +659,8 @@ class Menu {
         time = 50;
         duration = 50;
         if (time > 0) {
-          TextLevel();
-          TimeRemaining();
+          this.TextLevel();
+          this.TimeRemaining();
 
           if (time <= -0) {
             time = 0;
