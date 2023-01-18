@@ -80,33 +80,100 @@
     <section id="about" class="about">
       <div class="container" data-aos="fade-up">
 
-        <div class="content ps-lg-6">
-          <p>
-            Avoid The Shuriken mengemban tugas untuk dapat menjadi pusat sistem pendidikan dan pelatihan yang
-            diperuntukkan bagi alumni Politeknik Negeri Jakarta. Lulusan/alumni PNJ menjadi sebuah komponen yang sangat
-            penting dalam rangka meningkatkan akreditasi sebuah perguruan tinggi. Keberadaan unit CDC menjadi bagian
-            yang sangat penting di perguruan tinggi, tak terkecuali Politeknik Negeri Jakarta.
-          </p>
-          <p>
-            Adapun tugas-tugas yang dapat diemban oleh unit CDC dirangkum berdasarkan kebutuhan-kebutuhan sebagai
-            berikut.
-          </p>
-        </div>
-
         <div class="accordion" id="accordionExample">
           <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
               <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
                 aria-expanded="true" aria-controls="collapseOne">
-                <p>1. Alumni</p>
+                <p>game.pde</p>
               </button>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
               data-bs-parent="#accordionExample">
               <div class="accordion-body">
-                CDC memberikan informasi terbaru kepada para alumni tentang lowongan kerja, rekruitmen tenaga kerja, dan
-                melalui CDC alumni juga dapat memantau berbagai kegiatan tentang informasi pekerjaan yang ada berbagai
-                tempat.
+                <pre>
+import processing.sound.*;
+
+SoundFile soundButton, soundClick, backsound, soundMenu, soundGamePlay;
+PImage BgHome, gameBackground, BgMenu, charShuriken, boxingRing, characterNinja;
+PFont namagame, menuFont, creditsFont;
+
+// Object Class
+Menu m = new Menu();
+Ninja n = new Ninja();
+Shuriken s = new Shuriken();
+
+boolean gameOver = false;
+
+float begin, countDown;
+float time = 25;
+float duration = 25;
+int levels = 1;
+
+int panels = 0;
+int hit = 0;
+int score = 0;
+
+void setup() {
+  smooth();
+  size(1000, 970);
+  begin = millis(); 
+  
+  // Load Sound
+  soundButton = new SoundFile(this, "../asset/sound/button.mp3"); 
+  soundMenu = new SoundFile(this, "../asset/sound/menu.mp3");
+  soundGamePlay = new SoundFile(this, "../asset/sound/gameplay.mp3");
+  soundMenu.play();
+  
+  // Load images
+  boxingRing = loadImage("../asset/images/boxingRing.jpg");
+  charShuriken = loadImage("../asset/images/shuriken.png");
+  characterNinja = loadImage("../asset/images/ninja.png");
+  BgHome = loadImage("../asset/images/BgHome.jpg");
+  BgMenu = loadImage("../asset/images/backgrounmenufix.png");
+  
+  //Load font style
+  menuFont = loadFont("../asset/font/EngraversMT-25.vlw");
+  creditsFont = loadFont("../asset/font/EngraversMT-22.vlw");
+  namagame = loadFont("../asset/font/Algerian-48.vlw");
+  
+}
+
+void draw() {
+  image(BgHome, 0, 0); 
+  switch(panels){
+    case 0:
+      m.Home();
+      break;
+    case 1:
+      m.menu();
+      break;
+    case 2:
+      m.Play();
+      break;
+    case 3:
+      m.Options();
+      break;
+    case 4:
+      m.Credits();
+      break;
+    case 5:
+      m.Quit();
+      break;
+    case 6:
+      m.TryAgain();
+      break;
+    case 7:
+      m.Levels();
+      break;
+    case 8:
+      m.BackToHome();
+      break;
+    default:
+      println("Page not found");
+  }
+}
+                </pre>
               </div>
             </div>
           </div>
@@ -114,17 +181,735 @@
             <h2 class="accordion-header" id="headingTwo">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                <p>2. <i>Tracer Study</i> untuk Akreditasi Kampus</p>
+                <p>Menu.pde</p>
               </button>
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
               data-bs-parent="#accordionExample">
               <div class="accordion-body">
-                CDC merupakan salah aspek yang sangat penting untuk meningkatkan akreditasi yang merupakan keberhasilan
-                lulusan di dalam dunia kerja. Avoid The Shuriken mengemban tugas untuk dapat mengintegrasikan tracer study semua
-                jurusan dan program studi yang pada akhirnya terpusat. Akreditasi merupakan upaya pemerintah untuk
-                menjamin mutu alumni dari sebuah perguruan tinggi. Dengan demikian, maka disinilah kampus sangat perlu
-                kepada pusat karier untuk memantau keberhasilan lulusan di dunia kerja.
+                <pre>
+class Menu{
+  // Variabel
+  
+  
+  // Constructor
+  Menu(){
+  
+  }
+  
+  // Method
+  void Home(){
+    pushMatrix();
+    image(BgMenu, 0, 0); 
+    
+    textSize(100);
+    fill(255, 255, 200);
+    text("Avoid", 550, 200);
+    text("The", 600, 320);
+    text("Shuriken", 480, 440);
+    fill(255);
+    rect(607, 605, 200, 60, 20);
+    fill(0);
+    textSize(50);
+    textFont(namagame);
+    text("Start", 630, 650);
+    popMatrix();
+    
+    if(dist(mouseX, mouseY, 617, 630)<10 ||
+       dist(mouseX, mouseY, 627, 630)<10 ||
+       dist(mouseX, mouseY, 637, 630)<10 ||
+       dist(mouseX, mouseY, 647, 630)<10 ||
+       dist(mouseX, mouseY, 657, 630)<10 ||
+       dist(mouseX, mouseY, 667, 630)<10 ||
+       dist(mouseX, mouseY, 677, 630)<10 ||
+       dist(mouseX, mouseY, 687, 630)<10 ||
+       dist(mouseX, mouseY, 697, 630)<10 ||
+       dist(mouseX, mouseY, 707, 630)<10 ||
+       dist(mouseX, mouseY, 717, 630)<10 ||
+       dist(mouseX, mouseY, 727, 630)<10 ||
+       dist(mouseX, mouseY, 737, 630)<10 ||
+       dist(mouseX, mouseY, 747, 630)<10 ||
+       dist(mouseX, mouseY, 757, 630)<10 ||
+       dist(mouseX, mouseY, 767, 630)<10 ||
+       dist(mouseX, mouseY, 777, 630)<10 ||
+       dist(mouseX, mouseY, 787, 630)<10){
+         
+      pushMatrix();
+      fill(200);
+      rect(600, 600, 200, 60, 20);
+      textSize(50);
+      fill(0);
+      text("Start", 625, 645);
+      popMatrix();
+      if (mousePressed) {
+        soundButton.play();
+        panels = 1;
+      }
+    }
+  }
+  
+  void menu(){
+    pushMatrix();
+    image(BgHome, 0, 0); 
+    popMatrix();
+    
+    pushMatrix();
+    translate(20, 100);
+    textSize(75);
+    fill(255, 255, 200);
+    text("______________", 365, 50);
+    text("________", 480, 130);
+    text("M.E.N.U", 500, 200);
+    text("________", 480, 200);
+    
+    fill(150);
+    rect(480, 250, 300, 60, 20);
+    fill(255);
+    textSize(50);
+    text("PLAY", 560, 300);
+    if(dist(mouseX, mouseY, 507, 380)<10 ||
+       dist(mouseX, mouseY, 520, 380)<10 ||
+       dist(mouseX, mouseY, 530, 380)<10 ||
+       dist(mouseX, mouseY, 540, 380)<10 ||
+       dist(mouseX, mouseY, 550, 380)<10 ||
+       dist(mouseX, mouseY, 560, 380)<10 ||
+       dist(mouseX, mouseY, 570, 380)<10 ||
+       dist(mouseX, mouseY, 580, 380)<10 ||
+       dist(mouseX, mouseY, 590, 380)<10 ||
+       dist(mouseX, mouseY, 600, 380)<10 ||
+       dist(mouseX, mouseY, 610, 380)<10 ||
+       dist(mouseX, mouseY, 620, 380)<10 ||
+       dist(mouseX, mouseY, 630, 380)<10 ||
+       dist(mouseX, mouseY, 640, 380)<10 ||
+       dist(mouseX, mouseY, 650, 380)<10 ||
+       dist(mouseX, mouseY, 660, 380)<10 ||
+       dist(mouseX, mouseY, 670, 380)<10 ||
+       dist(mouseX, mouseY, 680, 380)<10 ||
+       dist(mouseX, mouseY, 690, 380)<10 ||
+       dist(mouseX, mouseY, 700, 380)<10 ||
+       dist(mouseX, mouseY, 710, 380)<10 ||
+       dist(mouseX, mouseY, 720, 380)<10 ||
+       dist(mouseX, mouseY, 730, 380)<10 ||
+       dist(mouseX, mouseY, 740, 380)<10 ||
+       dist(mouseX, mouseY, 750, 380)<10 ||
+       dist(mouseX, mouseY, 760, 380)<10 ||
+       dist(mouseX, mouseY, 770, 380)<10 ||
+       dist(mouseX, mouseY, 787, 380)<10){
+         
+      fill(255, 255, 200);
+      triangle(400, 280, 370, 295, 370, 265);
+      fill(200);
+      rect(430, 250, 400, 60, 20);
+      textSize(50);
+      fill(0);
+      text("PLAY", 560, 300);
+      if (mousePressed) {
+        soundMenu.stop();
+        soundButton.play();
+        soundGamePlay.play();
+        panels = 2;
+      }
+    }
+    
+    fill(150);
+    rect(480, 350, 300, 60, 20);
+    fill(255);
+    textSize(50);
+    text("OPTIONS", 530, 400);
+      if(dist(mouseX, mouseY, 507, 480)<10 ||
+         dist(mouseX, mouseY, 520, 480)<10 ||
+         dist(mouseX, mouseY, 530, 480)<10 ||
+         dist(mouseX, mouseY, 540, 480)<10 ||
+         dist(mouseX, mouseY, 550, 480)<10 ||
+         dist(mouseX, mouseY, 560, 480)<10 ||
+         dist(mouseX, mouseY, 570, 480)<10 ||
+         dist(mouseX, mouseY, 580, 480)<10 ||
+         dist(mouseX, mouseY, 590, 480)<10 ||
+         dist(mouseX, mouseY, 600, 480)<10 ||
+         dist(mouseX, mouseY, 610, 480)<10 ||
+         dist(mouseX, mouseY, 620, 480)<10 ||
+         dist(mouseX, mouseY, 630, 480)<10 ||
+         dist(mouseX, mouseY, 640, 480)<10 ||
+         dist(mouseX, mouseY, 650, 480)<10 ||
+         dist(mouseX, mouseY, 660, 480)<10 ||
+         dist(mouseX, mouseY, 670, 480)<10 ||
+         dist(mouseX, mouseY, 680, 480)<10 ||
+         dist(mouseX, mouseY, 690, 480)<10 ||
+         dist(mouseX, mouseY, 700, 480)<10 ||
+         dist(mouseX, mouseY, 710, 480)<10 ||
+         dist(mouseX, mouseY, 720, 480)<10 ||
+         dist(mouseX, mouseY, 730, 480)<10 ||
+         dist(mouseX, mouseY, 740, 480)<10 ||
+         dist(mouseX, mouseY, 750, 480)<10 ||
+         dist(mouseX, mouseY, 760, 480)<10 ||
+         dist(mouseX, mouseY, 770, 480)<10 ||
+         dist(mouseX, mouseY, 787, 480)<10){
+         
+        pushMatrix();
+        fill(255, 255, 200);
+        triangle(400, 380, 370, 395, 370, 365);
+        fill(200);
+        rect(430, 350, 400, 60, 20);
+        textSize(50);
+        fill(0);
+        text("OPTIONS", 530, 400);
+        popMatrix();
+        
+        if (mousePressed) {
+          soundButton.play();
+          pushMatrix();
+          fill(255, 255, 200);
+          text("OPTIONS", 530, 400);
+          popMatrix();
+          panels = 3;
+        }
+      }
+    
+    fill(150);
+    rect(480, 450, 300, 60, 20);
+    fill(255);
+    textSize(50);
+    text("credits", 530, 500);
+    if(dist(mouseX, mouseY, 507, 580)<10 ||
+       dist(mouseX, mouseY, 520, 580)<10 ||
+       dist(mouseX, mouseY, 530, 580)<10 ||
+       dist(mouseX, mouseY, 540, 580)<10 ||
+       dist(mouseX, mouseY, 550, 580)<10 ||
+       dist(mouseX, mouseY, 560, 580)<10 ||
+       dist(mouseX, mouseY, 570, 580)<10 ||
+       dist(mouseX, mouseY, 580, 580)<10 ||
+       dist(mouseX, mouseY, 590, 580)<10 ||
+       dist(mouseX, mouseY, 600, 580)<10 ||
+       dist(mouseX, mouseY, 610, 580)<10 ||
+       dist(mouseX, mouseY, 620, 580)<10 ||
+       dist(mouseX, mouseY, 630, 580)<10 ||
+       dist(mouseX, mouseY, 640, 580)<10 ||
+       dist(mouseX, mouseY, 650, 580)<10 ||
+       dist(mouseX, mouseY, 660, 580)<10 ||
+       dist(mouseX, mouseY, 670, 580)<10 ||
+       dist(mouseX, mouseY, 680, 580)<10 ||
+       dist(mouseX, mouseY, 690, 580)<10 ||
+       dist(mouseX, mouseY, 700, 580)<10 ||
+       dist(mouseX, mouseY, 710, 580)<10 ||
+       dist(mouseX, mouseY, 720, 580)<10 ||
+       dist(mouseX, mouseY, 730, 580)<10 ||
+       dist(mouseX, mouseY, 740, 580)<10 ||
+       dist(mouseX, mouseY, 750, 580)<10 ||
+       dist(mouseX, mouseY, 760, 580)<10 ||
+       dist(mouseX, mouseY, 770, 580)<10 ||
+       dist(mouseX, mouseY, 787, 580)<10){
+         
+      pushMatrix();
+      fill(255, 255, 200);
+      triangle(400, 480, 370, 495, 370, 465);
+      fill(200);
+      rect(430, 450, 400, 60, 20);
+      textSize(50);
+      fill(0);
+      text("credits", 530, 500);
+      popMatrix();
+      
+      if (mousePressed) {
+        soundButton.play();
+        pushMatrix();
+        fill(255, 255, 200);
+        text("credits", 530, 500);
+        popMatrix();
+        panels = 4;
+      }
+    }
+    
+    fill(150);
+    rect(480, 550, 300, 60, 20);
+    fill(255);
+    textSize(50);
+    text("QUIT", 570, 600);
+      if(dist(mouseX, mouseY, 507, 680)<10 ||
+         dist(mouseX, mouseY, 520, 680)<10 ||
+         dist(mouseX, mouseY, 530, 680)<10 ||
+         dist(mouseX, mouseY, 540, 680)<10 ||
+         dist(mouseX, mouseY, 550, 680)<10 ||
+         dist(mouseX, mouseY, 560, 680)<10 ||
+         dist(mouseX, mouseY, 570, 680)<10 ||
+         dist(mouseX, mouseY, 580, 680)<10 ||
+         dist(mouseX, mouseY, 590, 680)<10 ||
+         dist(mouseX, mouseY, 600, 680)<10 ||
+         dist(mouseX, mouseY, 610, 680)<10 ||
+         dist(mouseX, mouseY, 620, 680)<10 ||
+         dist(mouseX, mouseY, 630, 680)<10 ||
+         dist(mouseX, mouseY, 640, 680)<10 ||
+         dist(mouseX, mouseY, 650, 680)<10 ||
+         dist(mouseX, mouseY, 660, 680)<10 ||
+         dist(mouseX, mouseY, 670, 680)<10 ||
+         dist(mouseX, mouseY, 680, 680)<10 ||
+         dist(mouseX, mouseY, 690, 680)<10 ||
+         dist(mouseX, mouseY, 700, 680)<10 ||
+         dist(mouseX, mouseY, 710, 680)<10 ||
+         dist(mouseX, mouseY, 720, 680)<10 ||
+         dist(mouseX, mouseY, 730, 680)<10 ||
+         dist(mouseX, mouseY, 740, 680)<10 ||
+         dist(mouseX, mouseY, 750, 680)<10 ||
+         dist(mouseX, mouseY, 760, 680)<10 ||
+         dist(mouseX, mouseY, 770, 680)<10 ||
+         dist(mouseX, mouseY, 787, 680)<10){
+         
+        pushMatrix();
+        fill(255, 255, 200);
+        triangle(400, 580, 370, 595, 370, 565);
+        fill(200);
+        rect(430, 550, 400, 60, 20);
+        textSize(50);
+        fill(0);
+        text("QUIT", 570, 600);
+        popMatrix();
+        
+        if (mousePressed) {
+          soundButton.play();
+          pushMatrix();
+          fill(255, 255, 200);
+          text("QUIT", 570, 600);
+          popMatrix();
+          panels = 5;
+        }
+    }
+    
+    textSize(75);
+    fill(255, 255, 200);
+    text("______________", 365, 650);
+    popMatrix();
+    
+  }
+  
+  void Play(){
+    pushMatrix();
+    image(boxingRing,0,0);
+    n.showNinja();
+    s.showShuriken();
+    watchCollision();
+    watchCollision2();
+    watchCollision3();
+    n.mouseDragged();
+    popMatrix();
+    
+    println(levels);
+    Levels();
+    
+    Reset();
+  }
+  
+  void collisionDetection(int surface) {
+    s.shurikenY1= surface-(s.shurikenW/2);
+    hit+=1;
+    gameOver = true;
+  }
+  
+  void collisionDetection2(int surface2) {
+    s.shurikenY2= surface2-(s.shurikenW/2);
+    hit+=1;
+    gameOver = true;
+  }
+  
+  void collisionDetection3(int surface3) {
+    s.shurikenY3= surface3-(s.shurikenW/2);
+    hit+=1;
+    gameOver = true;
+  }
+  
+  void watchCollision() {
+    float overhead = mouseY - pmouseY;
+    if ((s.shurikenX1+(s.shurikenW/2) > mouseX-(n.ninjaW/2)) && (s.shurikenX1-(s.shurikenW/2) < mouseX+(n.ninjaW/2))) {
+      if (dist(s.shurikenX1, s.shurikenY1, s.shurikenX1, mouseY)<=(s.shurikenW/2)+abs(overhead)) {
+        collisionDetection(mouseY);
+      }
+    }
+  }
+  
+  void watchCollision2() {
+    float overhead2 = mouseY - pmouseY;
+    if ((s.shurikenX2+(s.shurikenW/2) > mouseX-(n.ninjaW/2)) && (s.shurikenX2-(s.shurikenW/2) < mouseX+(n.ninjaW/2))) {
+      if (dist(s.shurikenX2, s.shurikenY2, s.shurikenX2, mouseY)<=(s.shurikenW/2)+abs(overhead2)) {
+        collisionDetection2(mouseY);
+      }
+    }
+  }
+  
+  void watchCollision3() {
+    float overhead3 = mouseY - pmouseY;
+    if ((s.shurikenX3+(s.shurikenW/2) > mouseX-(n.ninjaW/2)) && (s.shurikenX3-(s.shurikenW/2) < mouseX+(n.ninjaW/2))) {
+      if (dist(s.shurikenX3, s.shurikenY3, s.shurikenX3, mouseY)<=(s.shurikenW/2)+abs(overhead3)) {
+        collisionDetection3(mouseY);
+      }
+    }
+  }
+  
+  void Reset(){
+    if(gameOver == true){
+      gameOver = true;
+      time = 0;
+      duration = 0;
+      pushMatrix();
+      background(0);
+      textFont(namagame);
+      fill(250,250,250);
+      text("PERMAINAN SELESAI", 270,200);
+      text("Total Skor Anda = " + score, 240,300);
+      text("BACK", 450,500);
+      popMatrix();
+      
+      if(dist(mouseX, mouseY, 450,490) < 30) {
+        pushMatrix();
+        fill(102, 178, 255);
+        text("BACK",450,500);
+        popMatrix();
+        
+        if (mousePressed){
+          pushMatrix();
+          println("Game Over");
+          soundGamePlay.stop();
+          soundMenu.play();
+          gameOver = false;
+          levels = 1;
+          score = 0;
+          s.shurikenX1 = 0;
+          s.shurikenY1 = 0;
+          s.shurikenX2 = 0;
+          s.shurikenY2 = 0;
+          s.shurikenX3 = 0;
+          s.shurikenY3 = 0;
+          s.shurikenX1 = random(200, 845);
+          s.shurikenY1 = random(159, 790);
+          s.shurikenX2 = random(200, 845);
+          s.shurikenY2 = random(159, 790);
+          s.shurikenX3 = random(200, 845);
+          s.shurikenY3 = random(159, 790);
+          pmouseX = 0;
+          pmouseY = 0;
+          begin = millis();
+          time = 10.5;
+          duration = 10.5;
+          panels = 1;
+          popMatrix();
+        }
+      }
+    }
+  }
+  
+  void Options(){
+    image(BgHome, 0, 0); 
+    pushMatrix();
+    translate(20, 100);
+    textSize(75);
+    fill(255, 255, 200);
+    text("______________", 365, 50);
+    text("____________", 400, 130);
+    text("O.P.T.I.O.N", 440, 200);
+    text("____________", 400, 200);
+    
+    fill(255);
+    textSize(50);
+    text("SOUND", 400, 300);
+    circle(700, 280, 40);
+    popMatrix();
+    
+    pushMatrix();
+    fill(224,224,224);
+    text("BACK", 30, 830);
+    popMatrix();
+    
+    if(dist(mouseX, mouseY, 30, 820) < 10 ||
+      dist(mouseX, mouseY, 40, 820) < 10 ||
+      dist(mouseX, mouseY, 50, 820) < 10 ||
+      dist(mouseX, mouseY, 60, 820) < 10 ||
+      dist(mouseX, mouseY, 70, 820) < 10 ||
+      dist(mouseX, mouseY, 80, 820) < 10 ||
+      dist(mouseX, mouseY, 90, 820) < 10 ||
+      dist(mouseX, mouseY, 100, 820) < 10 ||
+      dist(mouseX, mouseY, 120, 820) < 10) {
+        
+      pushMatrix();
+      fill(102, 178, 255);
+      text("BACK", 30, 830);
+      popMatrix();
+      
+      if (mousePressed) {
+        soundButton.play();
+        panels = 1;
+      }
+    }
+  }
+  
+  void BackToHome(){
+    pushMatrix();
+    background(0);
+    fill(255);
+    textFont(menuFont);
+    text("Back To Home ",width/2, height/2);
+    popMatrix();
+  }
+  
+  void TryAgain(){
+    pushMatrix();
+    background(0);
+    fill(255);
+    textFont(menuFont);
+    text("Try Again ",width/2, height/2);
+    popMatrix();
+  }
+  
+  void HomeInGame(){
+    pushMatrix();
+    background(0);
+    fill(255);
+    textFont(menuFont);
+    text("Home In Game ",width/2, height/2);
+    popMatrix();
+  }
+  
+  void Credits(){
+    background(0);
+    pushMatrix();
+    fill(255);
+    textSize(30);
+    text("PROJECT UAS GRAFIKA KOMPUTER", 250, 130);
+    text("DOSEN PENGAMPU   : ANGGI MARDIYONO", 220, 200);
+    text("KELAS", 385, 260);
+    text("TI 3A", 500, 260);
+    text("KELOMPOK 1", 390, 340);
+    text("MICHAEL NATANAEL", 200, 400);
+    text("2107411002", 630, 400);
+    text("MARWAH NUR SHAFIRA", 200, 450);
+    text("2107411008", 630, 450);
+    text("ANNISA MARFADILLA", 200, 500);
+    text("2107411019", 630, 500);
+    text("TEKNIK INFORMATIKA DAN KOMPUTER ", 230, 600);
+    text("POLITEKNIK NEGERI JAKARTA", 285, 660);
+    text("2022/2023", 430, 720);
+    popMatrix();
+    
+    pushMatrix();
+    fill(224,224,224);
+    text("BACK", 30, 830);
+    popMatrix();
+    
+    if(dist(mouseX, mouseY, 30, 820) < 10 ||
+       dist(mouseX, mouseY, 40, 820) < 10 ||
+       dist(mouseX, mouseY, 50, 820) < 10 ||
+       dist(mouseX, mouseY, 60, 820) < 10 ||
+       dist(mouseX, mouseY, 70, 820) < 10 ||
+       dist(mouseX, mouseY, 80, 820) < 10 ||
+       dist(mouseX, mouseY, 90, 820) < 10 ||
+       dist(mouseX, mouseY, 100, 820) < 10 ||
+       dist(mouseX, mouseY, 120, 820) < 10) {
+        
+      pushMatrix();
+      fill(102, 178, 255);
+      text("BACK", 30, 830);
+      popMatrix();
+      if (mousePressed) {
+      soundButton.play();
+      delay(200);
+      panels = 1;
+      }
+    }
+  }
+  
+  void Quit(){
+    pushMatrix();
+    fill(224,224,224);
+    text("ARE YOU SURE?", 350, 230);
+    text("______________", 350, 250);
+    text("YES...", 670, 390);
+    text("NO!", 700, 480);
+    popMatrix();
+  
+    if (dist(mouseX, mouseY, 670, 370) < 10 ||
+        dist(mouseX, mouseY, 680, 370) < 10 ||
+        dist(mouseX, mouseY, 690, 370) < 10 ||
+        dist(mouseX, mouseY, 700, 370) < 10 ||
+        dist(mouseX, mouseY, 710, 370) < 10 ||
+        dist(mouseX, mouseY, 720, 370) < 10 ||
+        dist(mouseX, mouseY, 730, 370) < 10 ||
+        dist(mouseX, mouseY, 740, 370) < 10 ||
+        dist(mouseX, mouseY, 750, 370) < 10 ||
+        dist(mouseX, mouseY, 760, 370) < 10 ||
+        dist(mouseX, mouseY, 770, 370) < 10 ||
+        dist(mouseX, mouseY, 780, 370) < 10 ||
+        dist(mouseX, mouseY, 790, 370) < 10 ||
+        dist(mouseX, mouseY, 810, 370) < 10 ||
+        dist(mouseX, mouseY, 820, 370) < 10 ||
+        dist(mouseX, mouseY, 830, 370) < 10 ||
+        dist(mouseX, mouseY, 840, 370) < 10 ||
+        dist(mouseX, mouseY, 850, 370) < 10) {
+          
+      pushMatrix();
+      fill(102, 178, 255);
+      text("YES...", 670, 390);
+      popMatrix();
+      if (mousePressed) {
+        soundButton.play();
+        exit();
+      }
+    }
+    
+    if (dist(mouseX, mouseY, 700, 460) < 10 ||
+        dist(mouseX, mouseY, 710, 460) < 10 ||
+        dist(mouseX, mouseY, 720, 460) < 10 ||
+        dist(mouseX, mouseY, 730, 460) < 10 ||
+        dist(mouseX, mouseY, 740, 460) < 10 ||
+        dist(mouseX, mouseY, 750, 460) < 10 ||
+        dist(mouseX, mouseY, 760, 460) < 10 ||
+        dist(mouseX, mouseY, 770, 460) < 10 ||
+        dist(mouseX, mouseY, 780, 460) < 10 ||
+        dist(mouseX, mouseY, 790, 460) < 10 ||
+        dist(mouseX, mouseY, 800, 460) < 10 ||
+        dist(mouseX, mouseY, 810, 460) < 10) {
+      
+      pushMatrix();
+      fill(102, 178, 255);
+      text("NO!", 700, 480);
+      popMatrix();
+      if (mousePressed) {
+        soundButton.play();
+        panels = 0;
+      }
+    }
+  }
+  
+  //void Level(){
+  //  pushMatrix();
+  //  image(menuBackground, 0, 0);
+  //  fill(224,224,224);
+  //  popMatrix();
+    
+  //  switch(levels) {
+  //    case 1: 
+  //      pushMatrix();
+  //      textFont(menuFont);
+  //      text("Level " + levels, 160, 240);
+  //      StartGame();
+  //      popMatrix();
+  //    break;
+      
+  //    case 2: 
+  //      pushMatrix();
+  //      textFont(menuFont);
+  //      text("Level " + levels, 160, 240);
+  //      StartGame();
+  //      popMatrix();
+  //    break;
+      
+  //    case 3: 
+  //      pushMatrix();
+  //      textFont(menuFont);
+  //      text("Level " + levels, 160, 240);
+  //      StartGame();
+  //      popMatrix();
+  //    break;
+     
+  //  }
+  //}
+  
+  void Levels(){
+    panels = 2;
+    switch (levels) {
+      // ------------ Level 1 --------------
+      case 1:
+        TextLevel();
+        TimeRemaining();
+          
+        if(time <= -0){
+          time = 0;
+          duration = 0;
+          levels++;
+          panels = 2;
+        }
+      break;
+        
+      // ------------ Level 2 --------------
+      case 2:
+        pushMatrix();
+        s.showShuriken2();
+        popMatrix();
+        
+        time = 40;
+        duration = 40;
+        //println();
+        if (time > 0){
+          TextLevel();
+          TimeRemaining();
+          
+          if(time <= -0){
+            time = 0;
+            duration = 0;
+            levels++;
+            panels = 2;
+          }
+        }
+      break;
+        
+      // ------------ Level 3 --------------
+      case 3: 
+        pushMatrix();
+        s.showShuriken2();
+        s.showShuriken3();
+        popMatrix();
+        
+        time = 50;
+        duration = 50;
+        if (time > 0){
+          TextLevel();
+          TimeRemaining();
+          
+          if(time <= -0){
+            time = 0;
+            duration = 0;
+            pushMatrix();
+            background(0);
+            textFont(menuFont);
+            fill(255);
+            text("You WONNNNN", width/2, height/2);
+            popMatrix();
+          }
+        }
+      break; 
+     
+    }
+  }
+  
+  
+  void StartGame(){
+    pushMatrix();
+    textFont(menuFont);
+    text("Start!", 180, 560);
+    popMatrix();
+    if (dist(mouseX, mouseY, 250, 550)<39) {
+      pushMatrix();
+      fill(102, 178, 255);
+      text("Start!", 180, 560);
+      popMatrix();
+      if (mousePressed) {
+        panels = 4;
+      }
+    }
+  }
+  
+  void TimeRemaining(){
+    pushMatrix();
+    textFont(menuFont);
+    time = duration - (millis() - begin)/1000;
+    text(time, 860, 40);
+    popMatrix();
+  }
+  
+  void TextLevel(){
+    pushMatrix();
+    textFont(menuFont);
+    text("Level " + levels, 450, 40);
+    popMatrix();
+  }
+ 
+}
+                </pre>
               </div>
             </div>
           </div>
@@ -132,16 +917,40 @@
             <h2 class="accordion-header" id="headingThree">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                <p>3. Mengetahui <i>Outcome</i> Pendidikan yang Dihasilkan oleh Perguruan Tinggi</p>
+                <p>Ninja.pde</p>
               </button>
             </h2>
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
               data-bs-parent="#accordionExample">
               <div class="accordion-body">
-                Pada aspek ini perguruan tinggi pasti akan menghasilkan hasil/<i>outcome</i>. Untuk itu, bagaimana
-                perguruan mengetahui <i>outcome</i> sehingga dapat bermanfaat dalam perubahan kondisi sosial, budaya,
-                ekonomi masyarakat. Oleh karena itu, kampus sangat perlu kepada pusat karier untuk menampung semua
-                aspirasi alumni dalam pengembangan pembangunan sesuai dengan program studi yang digeluti semasa kuliah.
+                <pre>
+class Ninja {
+  float ninjaX, ninjaY, ninjaW, ninjaH;
+  
+  // Constructor
+  Ninja() {
+    ninjaX = 450;
+    ninjaY = 450;
+    ninjaW = 100;
+    ninjaH = 100;
+  }
+  
+  // Method
+  void showNinja() {
+   image(characterNinja, ninjaX, ninjaY, ninjaW, ninjaH);
+  }
+  
+  void mouseDragged(){
+    if(mouseX >= 150 && mouseX <= 845 - ninjaW + 1){
+      ninjaX = mouseX;
+    }
+    if(mouseY >= 160 && mouseY <= 835 - ninjaH){
+      ninjaY = mouseY;
+    }
+  }
+  
+}
+                </pre>
               </div>
             </div>
           </div>
@@ -149,86 +958,172 @@
             <h2 class="accordion-header" id="headingThree">
               <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                 data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                <p>4. Mengetahui Kontribusi Perguruan Tinggi terhadap Kompetensi yang ada di Dunia Kerja</p>
+                <p>Shuriken.pde</p>
               </button>
             </h2>
             <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree"
               data-bs-parent="#accordionExample">
               <div class="accordion-body">
-                Aspek ini merupakan misi dari sebuah perguruan tinggi untuk menjadikan mahasiswanya berkompeten pada
-                program studi yang mereka pilih. Sedangkan untuk mengetahu seberapa berhasil alumninya, maka kampus
-                perlu menyediakan sistem untuk mengukur kontribusi alumni terhadap kampus. Di samping itu, alumni juga
-                dipermudah untuk memberikan informasi tentang karier dan data domisili para alumni serta dapat juga
-                menginfokan kontribuasinya dalam dunia kerja. Hal tersebut dapat juga dijadikan alat evaluasi perguruan
-                tinggi dalam memperbaiki kurikulum program studi.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="headingThree">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                <p>5. <i>Monitoring</i> Lulusan Perguruan Tinggi Ketika Memasuki Dunia Kerja</p>
-              </button>
-            </h2>
-            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingThree"
-              data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                Perguruan tinggi menjadi tempat berkumpulnya mahasiswa dari seluruh Indonesia dalam jumlah yang sangat
-                luar biasa. Pada setiap semester atau tahun setiap meluluskan alumninya minimal 2 periode wisuda.
-                Lulusan akan menyebar keseluruh instansi dan dunia kerja. Maka diperlukan strategi untuk merancang dan
-                mempromosikan dari segi geografis atau pun instansi. Untuk merancang berbagai strategi tersebut dari
-                lulusan diperlukan kepada situs alumni yang memberikan kemudahan kepada laumni untuk meng-<i>update</i>
-                kondisi terbaru. Ini akan memudahkan pihak kehumasan kampus dalam menjaring mahasiswa baru pada daerah
-                yang geografis lulusan atau jaringan kerja pada instansi lulusan.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="headingThree">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                <p>6. Membangun Silaturahmi dengan Alumni</p>
-              </button>
-            </h2>
-            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingThree"
-              data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                Pada aspek ini perlu dibangun silaturahmi antara alumni dan almamater karena ikatan itu akan
-                mengahasilkan kemanfaatan, baik bagi alumni maupun perguruan tinggi. Menyadari pentingnya hal ini,
-                hampir di setiap perguruan tinggi membuat organisasi kealumnian masing-masing. Kekerabatan dan jaringan
-                relasi dengan alumni akan semakin erat karena dengan memanfaatkan teknologi internet maka dimungkinkan
-                interaksi tanpa batasan tempat dan waktu. Melalui aplikasi <i>tracer study</i> kampus dapat mewujudkan
-                hal tersebut.
-              </div>
-            </div>
-          </div>
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="headingThree">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                <p>7. Evaluasi Perguruan Tinggi</p>
-              </button>
-            </h2>
-            <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingThree"
-              data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                Evaluasi adalah keharusan bagi perguruan tinggi yang ingin meningkatkan mutu karena dengan evaluasi
-                dapat dijadikan dasar pengambilan keputusan terkait tingkat keberhasilan yang telah dicapai dan tindakan
-                selanjutnya yang diperlukan. Selain pada peningkatan skill yang dibutuhkan industri dengan menambah mata
-                kuliah tertentu, evaluasi juga bisa dijadikan bahan pengkajian permasalahan manajemen seperti alur
-                pendaftaran mahasiswa baru yang lebih mudah sesuai kondisi geografis atau hal lain dari kolom sumbang
-                saran alumni (<a
-                  href="https://www.saifullahidris.com/2019/05/career-development-center-dan-kebutuhan.html"
-                  target="_blank">https://www.saifullahidris.com/2019/05/career-development-center-dan-kebutuhan.html</a>).
-                <br><br>
-                Ada beberapa hal yang dikembangkan dalam <i>Avoid The Shuriken</i> PNJ, yaitu Pengembangan
-                Karier,
-                Rekruitmen, dan <i>Tracer Study</i> yang di dalamnya juga terdapat tracer terhadap kepuasan industri.
-                Dengan
-                ketiga fokus pengembangan tersebut diharapkan <i>Avoid The Shuriken</i> dapat mewujudkan beberapa
-                program yang akan membantu alumni dalam mewujudkan akreditasi Kampus yang lebih baik lagi ke depan.
-                (Linda)
+                <pre>
+class Shuriken{
+  // Variabel
+  float shurikenX1, shurikenY1, shurikenX2, shurikenY2, shurikenX3, shurikenY3, shurikenW, shurikenH;
+  float speedShurikenX1, speedShurikenY1, speedShurikenX2, speedShurikenY2, speedShurikenX3, speedShurikenY3;
+  int xDirectionShuriken1, yDirectionShuriken1 , xDirectionShuriken2, yDirectionShuriken2, xDirectionShuriken3, yDirectionShuriken3; 
+  
+  // Constructor
+  Shuriken(){
+    shurikenX1 = random(200, 845);
+    shurikenY1 = random(159, 790);
+    
+    shurikenX2 = random(200, 845);
+    shurikenY2 = random(159, 790);
+    
+    shurikenX3 = random(200, 845);
+    shurikenY3 = random(159, 790);
+    
+    //shurikenX1 = 450;
+    //shurikenY1 = 450;
+    
+    shurikenW = 40;
+    shurikenH = 40;
+    
+    speedShurikenX1 = 1;
+    speedShurikenY1 = 1;
+    speedShurikenX2 = 3;
+    speedShurikenY2 = 3;
+    speedShurikenX3 = 7;
+    speedShurikenY3 = 7;
+    
+    xDirectionShuriken1 = 6;  
+    yDirectionShuriken1 = 5; 
+    xDirectionShuriken2 = 4;  
+    yDirectionShuriken2 = 3;
+    xDirectionShuriken3 = 2;  
+    yDirectionShuriken3 = 1;
+    
+    
+  }
+  
+  // Method
+  void showShuriken(){
+    pushMatrix();
+    image(charShuriken, shurikenX1 - 45, shurikenY1, shurikenW, shurikenH);
+    popMatrix();
+    
+    if (!gameOver){
+      pushMatrix();
+      shurikenX1 = shurikenX1 + ( speedShurikenX1 * xDirectionShuriken1);
+      shurikenY1 = shurikenY1 + ( speedShurikenY1 * yDirectionShuriken1);
+      popMatrix();
+     
+      m.TextLevel();
+      m.TimeRemaining();
+          
+      pushMatrix();
+      textFont(menuFont);
+      text("Home ",30, 950);
+      popMatrix();
+          
+      if ((shurikenX1 > 845) || (shurikenX1 < 200)) {
+        speedShurikenX1 *= -1;
+      } 
+        
+      if ((shurikenY1 > 790) || (shurikenY1 < 159)) {
+        speedShurikenY1 *= -1;
+      }
+      
+      n.showNinja();
+      score += 1;
+      Skor();
+      
+      if(hit ==1){
+        gameOver = true;
+      }
+      
+    } else{
+       gameOver = true;
+    }
+    
+  }
+  
+  void Skor(){
+    pushMatrix();
+      fill(0);
+      textFont(menuFont);
+      text("Skor Anda : " + score, 20, 40);
+      popMatrix();
+  }
+  
+  void showShuriken2(){
+    pushMatrix();
+    image(charShuriken, shurikenX2 - 45, shurikenY2, shurikenW, shurikenH);
+    popMatrix();
+    
+    if (!gameOver){
+      pushMatrix();
+      shurikenX2 = shurikenX2 + ( speedShurikenX2 * xDirectionShuriken2);
+      shurikenY2 = shurikenY2 + ( speedShurikenY2 * yDirectionShuriken2);
+      popMatrix();
+ 
+      if ((shurikenX2 > 845) || (shurikenX2 < 200)) {
+        speedShurikenX2 *= -1;
+      } 
+        
+      if ((shurikenY2 > 790) || (shurikenY2 < 159)) {
+        speedShurikenY2 *= -1;
+      }
+      
+      n.showNinja();
+      score += 1;
+      Skor();
+      
+      if(hit ==1){
+        gameOver = true;
+      }
+      
+    } else{
+      gameOver = true;
+    }
+    
+  }
+  
+  void showShuriken3(){
+    pushMatrix();
+    image(charShuriken, shurikenX3 - 45, shurikenY3, shurikenW, shurikenH);
+    popMatrix();
+    
+    if (!gameOver){
+      pushMatrix();
+      shurikenX3 = shurikenX3 + ( speedShurikenX3 * xDirectionShuriken3);
+      shurikenY3 = shurikenY3 + ( speedShurikenY3 * yDirectionShuriken3);
+      popMatrix();
+ 
+      if ((shurikenX3 > 845) || (shurikenX3 < 200)) {
+        speedShurikenX3 *= -1;
+      } 
+       
+        
+      if ((shurikenY3 > 790) || (shurikenY3 < 159)) {
+        speedShurikenY3 *= -1;
+      }
+      
+      n.showNinja();
+      score += 1;
+      Skor();
+      
+      if(hit ==1){
+        gameOver = true;
+      }
+      
+    } else{
+      gameOver = true;
+    }
+    
+  }
+  
+}
+                </pre>
               </div>
             </div>
           </div>
