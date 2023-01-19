@@ -11,9 +11,9 @@ Shuriken s = new Shuriken();
 
 boolean gameOver = false;
 
-float begin, countDown;
-float time = 25;
-float duration = 25;
+float begin;
+float time = 10;
+float duration = 10;
 int levels = 1;
 
 int panels = 0;

@@ -117,6 +117,7 @@ class Menu{
         soundMenu.stop();
         soundButton.play();
         soundGamePlay.play();
+        restart();
         panels = 2;
       }
     }
@@ -585,40 +586,6 @@ class Menu{
     }
   }
   
-  //void Level(){
-  //  pushMatrix();
-  //  image(menuBackground, 0, 0);
-  //  fill(224,224,224);
-  //  popMatrix();
-    
-  //  switch(levels) {
-  //    case 1: 
-  //      pushMatrix();
-  //      textFont(menuFont);
-  //      text("Level " + levels, 160, 240);
-  //      StartGame();
-  //      popMatrix();
-  //    break;
-      
-  //    case 2: 
-  //      pushMatrix();
-  //      textFont(menuFont);
-  //      text("Level " + levels, 160, 240);
-  //      StartGame();
-  //      popMatrix();
-  //    break;
-      
-  //    case 3: 
-  //      pushMatrix();
-  //      textFont(menuFont);
-  //      text("Level " + levels, 160, 240);
-  //      StartGame();
-  //      popMatrix();
-  //    break;
-     
-  //  }
-  //}
-  
   void Levels(){
     panels = 2;
     switch (levels) {
@@ -641,8 +608,8 @@ class Menu{
         s.showShuriken2();
         popMatrix();
         
-        time = 40;
-        duration = 40;
+        time = 30;
+        duration = 30;
         //println();
         if (time > 0){
           TextLevel();
@@ -664,8 +631,8 @@ class Menu{
         s.showShuriken3();
         popMatrix();
         
-        time = 50;
-        duration = 50;
+        time = 60;
+        duration = 60;
         if (time > 0){
           TextLevel();
           TimeRemaining();
@@ -677,7 +644,7 @@ class Menu{
             background(0);
             textFont(menuFont);
             fill(255);
-            text("You WONNNNN", width/2, height/2);
+            text("Congratulation!!!! You WIN", width/2, height/2);
             popMatrix();
           }
         }
@@ -717,5 +684,14 @@ class Menu{
     text("Level " + levels, 450, 40);
     popMatrix();
   }
+  
+  void start(){
+    begin = millis() ;
+  }
  
+   // Reset timer ke 0 dan restart timer
+  void restart(){
+    start() ;
+  }
+  
 }
