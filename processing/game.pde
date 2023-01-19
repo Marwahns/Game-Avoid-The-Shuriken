@@ -10,6 +10,7 @@ Ninja n = new Ninja();
 Shuriken s = new Shuriken();
 
 boolean gameOver = false;
+boolean gameWin = false;
 
 float begin;
 float time = 10;
