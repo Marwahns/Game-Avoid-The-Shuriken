@@ -296,9 +296,17 @@ class Menu{
     image(boxingRing,0,0);
     n.showNinja();
     s.showShuriken();
-    watchCollision();
-    watchCollision2();
-    watchCollision3();
+    
+    if (score > 100) {
+      watchCollision();
+    }
+    if (score > 800) {
+      watchCollision2();
+    }
+    if (score > 3000) {
+      watchCollision3();
+    }
+    
     n.mouseDragged();
     popMatrix();
     
@@ -340,29 +348,29 @@ class Menu{
   }
   
   void watchCollision2() {
-    //float distX = abs((n.ninjaX + n.ninjaW/2) - (s.shurikenX2 + s.shurikenW/2));
-    //float distY = abs((n.ninjaY + n.ninjaH/2) - (s.shurikenY2 + s.shurikenH/2));
-    //float combinedHalfWidths = n.ninjaW/2 + s.shurikenW/2;
-    //float combinedHalfHeights = n.ninjaH/2 + s.shurikenH/2;
+    float distX = abs((n.ninjaX + n.ninjaW/2) - (s.shurikenX2 + s.shurikenW/2));
+    float distY = abs((n.ninjaY + n.ninjaH/2) - (s.shurikenY2 + s.shurikenH/2));
+    float combinedHalfWidths = n.ninjaW/2 + s.shurikenW/2;
+    float combinedHalfHeights = n.ninjaH/2 + s.shurikenH/2;
     
-    //if (distX < combinedHalfWidths) {
-    //  if (distY < combinedHalfHeights) {
-    //    collisionDetection2(mouseY);
-    //  }
-    //}
+    if (distX < combinedHalfWidths) {
+      if (distY < combinedHalfHeights) {
+        collisionDetection2(mouseY);
+      }
+    }
   }
   
   void watchCollision3() {
-    //float distX = abs((n.ninjaX + n.ninjaW/2) - (s.shurikenX3 + s.shurikenW/2));
-    //float distY = abs((n.ninjaY + n.ninjaH/2) - (s.shurikenY3 + s.shurikenH/2));
-    //float combinedHalfWidths = n.ninjaW/2 + s.shurikenW/2;
-    //float combinedHalfHeights = n.ninjaH/2 + s.shurikenH/2;
+    float distX = abs((n.ninjaX + n.ninjaW/2) - (s.shurikenX3 + s.shurikenW/2));
+    float distY = abs((n.ninjaY + n.ninjaH/2) - (s.shurikenY3 + s.shurikenH/2));
+    float combinedHalfWidths = n.ninjaW/2 + s.shurikenW/2;
+    float combinedHalfHeights = n.ninjaH/2 + s.shurikenH/2;
     
-    //if (distX < combinedHalfWidths) {
-    //  if (distY < combinedHalfHeights) {
-    //    collisionDetection3(mouseY);
-    //  }
-    //}
+    if (distX < combinedHalfWidths) {
+      if (distY < combinedHalfHeights) {
+        collisionDetection3(mouseY);
+      }
+    }
   }
   
   void Reset(){
@@ -379,7 +387,7 @@ class Menu{
       text("BACK", 450,500);
       popMatrix();
       
-      if(dist(mouseX, mouseY, 450,490) < 30) {
+      if(dist(mouseX, mouseY, 500, 490) < 70) {
         pushMatrix();
         fill(102, 178, 255);
         text("BACK",450,500); //<>//
@@ -430,7 +438,7 @@ class Menu{
       text("BACK", 450, 500);
       popMatrix();
       
-      if(dist(mouseX, mouseY, 450,490) < 30) {
+      if(dist(mouseX, mouseY, 500, 490) < 70) {
         pushMatrix();
         fill(102, 178, 255);
         text("BACK",450,500); //<>//
