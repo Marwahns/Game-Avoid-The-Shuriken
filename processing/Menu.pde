@@ -554,10 +554,10 @@ class Menu{
     fill(255);
     textSize(30);
     text("PROJECT UAS GRAFIKA KOMPUTER", 250, 130);
-    text("DOSEN PENGAMPU   : ANGGI MARDIYONO", 220, 200);
+    text("DOSEN PENGAMPU   : ANGGI MARDIYONO, M. KOM", 220, 200);
     text("KELAS", 385, 260);
     text("TI 3A", 500, 260);
-    text("KELOMPOK 1", 390, 340);
+    text("KELOMPOK 3", 390, 340);
     text("MICHAEL NATANAEL", 200, 400);
     text("2107411002", 630, 400);
     text("MARWAH NUR SHAFIRA", 200, 450);
