@@ -51,7 +51,7 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="documentation.html" class="active">Documentation</a></li>
-          <li><a href="https://youtu.be/3q50jmJR9HA" target="_blank">Download</a></li>
+          <li><a href="https://officeseamolec-my.sharepoint.com/:u:/g/personal/4129_etraining_seamolec_org/Ebr-huPRUVNPnDeenzWg-kcBa9Mm6TAX-JUIo7EyPN2MbA?e=G22h92" target="_blank">Download</a></li>
           <li><a href="about_us.html">About Us</a></li>
           <li><a href="related_link.html">Related Link</a></li>
         </ul>
@@ -63,7 +63,7 @@
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/about-header.jpg');">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/game.png');">
       <div class="container position-relative d-flex flex-column align-items-center">
 
         <h2>Documentation</h2>
@@ -103,10 +103,11 @@ Ninja n = new Ninja();
 Shuriken s = new Shuriken();
 
 boolean gameOver = false;
+boolean gameWin = false;
 
-float begin, countDown;
-float time = 25;
-float duration = 25;
+float begin;
+float time = 10;
+float duration = 10;
 int levels = 1;
 
 int panels = 0;
@@ -306,6 +307,7 @@ class Menu{
         soundMenu.stop();
         soundButton.play();
         soundGamePlay.play();
+        restart();
         panels = 2;
       }
     }
@@ -484,9 +486,17 @@ class Menu{
     image(boxingRing,0,0);
     n.showNinja();
     s.showShuriken();
-    watchCollision();
-    watchCollision2();
-    watchCollision3();
+    
+    if (score > 100) {
+      watchCollision();
+    }
+    if (score > 800) {
+      watchCollision2();
+    }
+    if (score > 3000) {
+      watchCollision3();
+    }
+    
     n.mouseDragged();
     popMatrix();
     
@@ -515,27 +525,39 @@ class Menu{
   }
   
   void watchCollision() {
-    float overhead = mouseY - pmouseY;
-    if ((s.shurikenX1+(s.shurikenW/2) > mouseX-(n.ninjaW/2)) && (s.shurikenX1-(s.shurikenW/2) < mouseX+(n.ninjaW/2))) {
-      if (dist(s.shurikenX1, s.shurikenY1, s.shurikenX1, mouseY)<=(s.shurikenW/2)+abs(overhead)) {
+    float distX = abs((n.ninjaX + n.ninjaW/2) - (s.shurikenX1 + s.shurikenW/2)); //<>//
+    float distY = abs((n.ninjaY + n.ninjaH/2) - (s.shurikenY1 + s.shurikenH/2));
+    float combinedHalfWidths = n.ninjaW/2 + s.shurikenW/2;
+    float combinedHalfHeights = n.ninjaH/2 + s.shurikenH/2;
+    
+    if (distX < combinedHalfWidths) {
+      if (distY < combinedHalfHeights) {
         collisionDetection(mouseY);
       }
     }
   }
   
   void watchCollision2() {
-    float overhead2 = mouseY - pmouseY;
-    if ((s.shurikenX2+(s.shurikenW/2) > mouseX-(n.ninjaW/2)) && (s.shurikenX2-(s.shurikenW/2) < mouseX+(n.ninjaW/2))) {
-      if (dist(s.shurikenX2, s.shurikenY2, s.shurikenX2, mouseY)<=(s.shurikenW/2)+abs(overhead2)) {
+    float distX = abs((n.ninjaX + n.ninjaW/2) - (s.shurikenX2 + s.shurikenW/2));
+    float distY = abs((n.ninjaY + n.ninjaH/2) - (s.shurikenY2 + s.shurikenH/2));
+    float combinedHalfWidths = n.ninjaW/2 + s.shurikenW/2;
+    float combinedHalfHeights = n.ninjaH/2 + s.shurikenH/2;
+    
+    if (distX < combinedHalfWidths) {
+      if (distY < combinedHalfHeights) {
         collisionDetection2(mouseY);
       }
     }
   }
   
   void watchCollision3() {
-    float overhead3 = mouseY - pmouseY;
-    if ((s.shurikenX3+(s.shurikenW/2) > mouseX-(n.ninjaW/2)) && (s.shurikenX3-(s.shurikenW/2) < mouseX+(n.ninjaW/2))) {
-      if (dist(s.shurikenX3, s.shurikenY3, s.shurikenX3, mouseY)<=(s.shurikenW/2)+abs(overhead3)) {
+    float distX = abs((n.ninjaX + n.ninjaW/2) - (s.shurikenX3 + s.shurikenW/2));
+    float distY = abs((n.ninjaY + n.ninjaH/2) - (s.shurikenY3 + s.shurikenH/2));
+    float combinedHalfWidths = n.ninjaW/2 + s.shurikenW/2;
+    float combinedHalfHeights = n.ninjaH/2 + s.shurikenH/2;
+    
+    if (distX < combinedHalfWidths) {
+      if (distY < combinedHalfHeights) {
         collisionDetection3(mouseY);
       }
     }
@@ -555,10 +577,10 @@ class Menu{
       text("BACK", 450,500);
       popMatrix();
       
-      if(dist(mouseX, mouseY, 450,490) < 30) {
+      if(dist(mouseX, mouseY, 500, 490) < 70) {
         pushMatrix();
         fill(102, 178, 255);
-        text("BACK",450,500);
+        text("BACK",450,500); //<>//
         popMatrix();
         
         if (mousePressed){
@@ -567,6 +589,58 @@ class Menu{
           soundGamePlay.stop();
           soundMenu.play();
           gameOver = false;
+          levels = 1;
+          score = 0;
+          s.shurikenX1 = 0;
+          s.shurikenY1 = 0;
+          s.shurikenX2 = 0;
+          s.shurikenY2 = 0;
+          s.shurikenX3 = 0;
+          s.shurikenY3 = 0;
+          s.shurikenX1 = random(200, 845);
+          s.shurikenY1 = random(159, 790);
+          s.shurikenX2 = random(200, 845);
+          s.shurikenY2 = random(159, 790);
+          s.shurikenX3 = random(200, 845);
+          s.shurikenY3 = random(159, 790);
+          pmouseX = 0;
+          pmouseY = 0;
+          begin = millis();
+          time = 10.5;
+          duration = 10.5;
+          panels = 1;
+          popMatrix();
+        }
+      }
+    }
+    
+    if(gameWin == true){
+      gameOver = true;
+      gameWin = true;
+      time = 0;
+      duration = 0;
+      pushMatrix();
+      background(0);
+      textFont(namagame);
+      fill(250,250,250);
+      text("Congratulation!!!! You WIN", 200, 200);
+      text("Total Skor Anda = " + score, 240, 300);
+      text("BACK", 450, 500);
+      popMatrix();
+      
+      if(dist(mouseX, mouseY, 500, 490) < 70) {
+        pushMatrix();
+        fill(102, 178, 255);
+        text("BACK",450,500); //<>//
+        popMatrix();
+        
+        if (mousePressed){
+          pushMatrix();
+          println("Game Over");
+          soundGamePlay.stop();
+          soundMenu.play();
+          gameOver = false;
+          gameWin = false;
           levels = 1;
           score = 0;
           s.shurikenX1 = 0;
@@ -670,10 +744,10 @@ class Menu{
     fill(255);
     textSize(30);
     text("PROJECT UAS GRAFIKA KOMPUTER", 250, 130);
-    text("DOSEN PENGAMPU   : ANGGI MARDIYONO", 220, 200);
+    text("DOSEN PENGAMPU   : ANGGI MARDIYONO, M. KOM", 220, 200);
     text("KELAS", 385, 260);
     text("TI 3A", 500, 260);
-    text("KELOMPOK 1", 390, 340);
+    text("KELOMPOK 3", 390, 340);
     text("MICHAEL NATANAEL", 200, 400);
     text("2107411002", 630, 400);
     text("MARWAH NUR SHAFIRA", 200, 450);
@@ -762,7 +836,7 @@ class Menu{
         dist(mouseX, mouseY, 790, 460) < 10 ||
         dist(mouseX, mouseY, 800, 460) < 10 ||
         dist(mouseX, mouseY, 810, 460) < 10) {
-      
+
       pushMatrix();
       fill(102, 178, 255);
       text("NO!", 700, 480);
@@ -773,40 +847,6 @@ class Menu{
       }
     }
   }
-  
-  //void Level(){
-  //  pushMatrix();
-  //  image(menuBackground, 0, 0);
-  //  fill(224,224,224);
-  //  popMatrix();
-    
-  //  switch(levels) {
-  //    case 1: 
-  //      pushMatrix();
-  //      textFont(menuFont);
-  //      text("Level " + levels, 160, 240);
-  //      StartGame();
-  //      popMatrix();
-  //    break;
-      
-  //    case 2: 
-  //      pushMatrix();
-  //      textFont(menuFont);
-  //      text("Level " + levels, 160, 240);
-  //      StartGame();
-  //      popMatrix();
-  //    break;
-      
-  //    case 3: 
-  //      pushMatrix();
-  //      textFont(menuFont);
-  //      text("Level " + levels, 160, 240);
-  //      StartGame();
-  //      popMatrix();
-  //    break;
-     
-  //  }
-  //}
   
   void Levels(){
     panels = 2;
@@ -830,8 +870,8 @@ class Menu{
         s.showShuriken2();
         popMatrix();
         
-        time = 40;
-        duration = 40;
+        time = 30;
+        duration = 30;
         //println();
         if (time > 0){
           TextLevel();
@@ -853,21 +893,16 @@ class Menu{
         s.showShuriken3();
         popMatrix();
         
-        time = 50;
-        duration = 50;
+        time = 60;
+        duration = 60;
         if (time > 0){
           TextLevel();
           TimeRemaining();
           
-          if(time <= -0){
+          if(time <= 0){
             time = 0;
             duration = 0;
-            pushMatrix();
-            background(0);
-            textFont(menuFont);
-            fill(255);
-            text("You WONNNNN", width/2, height/2);
-            popMatrix();
+            gameWin = true;
           }
         }
       break; 
@@ -906,7 +941,16 @@ class Menu{
     text("Level " + levels, 450, 40);
     popMatrix();
   }
+  
+  void start(){
+    begin = millis() ;
+  }
  
+   // Reset timer ke 0 dan restart timer
+  void restart(){
+    start() ;
+  }
+  
 }
                 </pre>
               </div>
